@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kwitansi Pembayaran - Yayasan Pendidikan HAS Darul Ilmi</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<aside class="side noprint">
+ <div class="brand"><div class="logo">🧾</div><div><b>Kwitansi<span>HDI</span></b><small>Sistem Kasir Yayasan</small></div></div>
+ <nav><a id="n1" class="on" tabindex="0" role="button" onclick="go('pos')" onkeydown="if(event.key=='Enter')go('pos')">Kasir (Kwitansi)</a><a id="n2" tabindex="0" role="button" onclick="go('prod')" onkeydown="if(event.key=='Enter')go('prod')">Manajemen Produk</a></nav>
+ <div class="sf"><b>Yayasan HAS Darul Ilmi</b><small>Jl. Cidurian Utara No.179, Bandung</small></div>
+</aside>
+<main class="main noprint">
+ <header class="top"><h1><span id="ttl">Halaman Kasir</span> <span class="badge">● Kasir Aktif</span></h1><div class="clock" id="clock"></div></header>
+ <div id="pos"><div class="tools"><input id="cari" type="search" placeholder="Cari produk..."></div>
+ <div class="cards" id="cards"></div></div>
+ <section id="prod">
+  <div class="phead"><div><h2>Daftar Produk Toko</h2><p>Kelola stok, harga, dan kategori produk Anda di sini.</p></div><button onclick="openMod(-1)">+ Tambah Produk Baru</button></div>
+  <div class="ptab"><table><thead><tr><th>Produk</th><th>Harga</th><th>Aksi</th></tr></thead><tbody id="ptb"></tbody></table></div>
+ </section>
+</main>
+<aside class="cart noprint">
+ <div class="ch"><h2>Keranjang Belanja</h2><button class="lnk" onclick="clearCart()">Kosongkan</button></div>
+ <div class="cb">
+  <div id="items"></div>
+  <details class="data" open><summary>Data kwitansi</summary>
+   <label>Telah terima dari<input id="dari" value="ARSYAKAYLA RENJANA MAEZUMA 12"></label>
+   <label>Tanggal<input id="tgl" type="date"></label>
+   <label>Kota<input id="kota" value="Bandung"></label>
+   <label>Penerima / Petugas<input id="ttd" value="Herni"></label>
+   <label>Catatan<input id="cat" placeholder="Opsional"></label>
+  </details>
+ </div>
+ <div class="cf">
+  <div class="tr"><span>Subtotal</span><b id="sub">Rp 0</b></div>
+  <div class="tr"><span>Diskon (Rp) <input id="disc" class="mini" type="number" min="0" placeholder="0"></span><b id="dv">- Rp 0</b></div>
+  <div class="tr"><span>PPN (11%) <input id="ppn" type="checkbox"></span><b id="pv">Rp 0</b></div>
+  <div class="tr big"><span>Total Bayar</span><b id="gt">Rp 0</b></div>
+  <button class="pay" onclick="showReceipt(true)">Tampilan Kwitansi</button>
+  <button class="pay2" onclick="printNow()">Langsung print</button>
+ </div>
+</aside>
+<div id="mod" class="mod noprint"><div class="mbox"><h2 id="mt" style="margin:0;font-size:17px"></h2>
+ <label>Nama produk<input id="mn"></label>
+ <label>Harga (Rp)<input id="mh" type="number" min="0"></label>
+ <label>Ikon (emoji)<input id="mi" maxlength="4"></label>
+ <p id="me" class="err"></p>
+ <div class="mb"><button class="pay2" style="margin:0" onclick="closeMod()">Batal</button><button onclick="saveMod()">Simpan</button></div>
+</div></div>
+ <div id="out" class="off">
+ <div class="noprint bar"><button onclick="window.print()">Cetak sekarang</button><button class="ghost" onclick="showReceipt(false)">Tutup</button></div>
+ <div class="scroll">
+ <div class="paper"><div class="in">
+  <div class="head">
+   <img src="logo.png" width="95" height="95" alt="Logo HDI" style="object-fit:contain">
+   <div>
+    <h1>YAYASAN PENDIDIKAN<br>HAS DARUL ILMI</h1>
+    <p>Jl. Cidurian Utara No.179 Sukapura - Kiaracondong</p>
+    <p>Telp. 022-7315421 Hp. 081395044476</p>
+   </div>
+   <img src="logo.png" width="95" height="95" alt="Logo HDI" style="object-fit:contain;justify-self:end">
+  </div>
+
+  <div class="line"><span class="lb">Telah terima dari</span>:<span class="v" id="pDari"></span></div>
+
+  <table>
+   <thead><tr><th style="width:60px;text-align:left">No</th><th>Keterangan Pembayaran</th><th style="text-align:right;width:190px">Jumlah</th></tr></thead>
+   <tbody id="pRows"></tbody>
+  </table>
+
+  <div class="tot">
+   <div class="t">Terbilang :<div class="nol" id="pTerb"></div></div>
+   <div class="tt"><b>Total :</b><div class="m"><span>Rp.</span><span id="pTot"></span></div></div>
+  </div>
+
+  <div class="sign"><div>
+   <div class="d"><span id="pKota"></span><span id="pTgl"></span></div>
+  </div></div>
+  <div class="cat">Catatan : <span id="pCat" style="font-weight:400"></span></div>
+  <div class="sign"><div><div class="ttd" id="pTtd"></div></div></div>
+ </div></div>
+ </div>
+ </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
